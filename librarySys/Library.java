@@ -1,17 +1,21 @@
 package librarySys;
 
+import javax.swing.plaf.synth.SynthOptionPaneUI;
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Scanner;
 
 public class Library {
     private final ArrayList<Integer> lib_student;
     private final ArrayList<Integer> lib_teacher;
-    private final Hashtable lib_admin;
+    private final Hashtable<String,String> lib_admin;
     private String access;
+    private int tries;
 
 
     Library() {
-        this.lib_admin = new Hashtable();
+        this.tries = 3;
+        this.lib_admin = new Hashtable<>();
         lib_admin.put("admin", "1234");
         lib_admin.put("admin1", "12345");
         lib_admin.put("admin2", "12346");
@@ -19,20 +23,32 @@ public class Library {
         this.lib_teacher = new ArrayList<>();
     }
 
-    void login(String userName, String pass) {
-        for (int i = 0; i < 3; i++) {
-            int tries = 3;
-            if (this.lib_admin.contains(userName) && this.lib_admin.get(userName) == pass) {
+    boolean login(String userName, String pass) {
+        if(this.tries == 0)
+        {
+            System.out.println("You have exceeded the try limit..");
+            return false;
+        }
+        while (this.tries > 0) {
+
+            if (this.lib_admin.contains(pass) && this.lib_admin.get(userName) == (pass)) {
                 System.out.println("Login SuccessFull...");
                 this.access = "admin";
-                break;
+                return true;
             } else {
-                System.out.println("Please Enter valid Credentials.. you have "+tries+ "tries left");
+                System.out.println("Please Enter valid Credentials.. you have "+this.tries+ "tries left");
+                Scanner in = new Scanner(System.in);
+                userName = in.nextLine();
+                pass = in.nextLine();
                 tries--;
+                login(userName,pass);
                 //If three tries are done the program will terminate
             }
         }
+        return false;
     }
+
+
 
 
 
