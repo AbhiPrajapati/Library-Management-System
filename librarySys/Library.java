@@ -6,9 +6,10 @@ import java.util.Hashtable;
 import java.util.Scanner;
 
 public class Library {
-    private final ArrayList<Integer> lib_student;
-    private final ArrayList<Integer> lib_teacher;
-    private final Hashtable<String,String> lib_admin;
+    public  ArrayList<Integer> lib_student;
+    public  ArrayList<Integer> lib_teacher;
+    public  ArrayList<Book> lib_book;
+    public Hashtable<String,String> lib_admin;
     private String access;
     private int tries;
 
@@ -21,6 +22,7 @@ public class Library {
         lib_admin.put("admin2", "12346");
         this.lib_student = new ArrayList<>();
         this.lib_teacher = new ArrayList<>();
+        this.lib_book = new ArrayList<>();
     }
 
     boolean login(String userName, String pass) {
