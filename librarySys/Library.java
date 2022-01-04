@@ -13,7 +13,6 @@ public class Library {
     private String access;
     private int tries;
 
-
     Library() {
         this.tries = 3;
         this.lib_admin = new Hashtable<>();
